@@ -27,7 +27,8 @@ while True:
    # variable "grey"
    grey = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
    
-   # run the face detector and store the output in the variable "rects"
+   # run the face detector on the grey image and store the output in 
+   # the variable "rects"
    rects = cascade.detectMultiScale(grey, scaleFactor=1.3, minNeighbors=3, minSize=(mn, mn), maxSize=(mx,mx))
 
    # loop through and draw the detected faces on the image

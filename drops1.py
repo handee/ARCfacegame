@@ -1,9 +1,11 @@
 
+# The next few lines contain import statements, which let us
+# use bits of other people's code
 import cv2
 import video
 import sys
 import numpy as np
-
+from random import randint
 
 
 # These are variables, which decide how big the picture is going to be
@@ -22,17 +24,25 @@ red=100
 # Open a window
 cv2.namedWindow('drops')
 
-# Create an image 
-myimage=np.zeros((height,width,3), np.uint8)
 
 
 while True:
+   # Create an image 
+   myimage=np.zeros((height,width,3), np.uint8)
+#################################################################
+
+
+   # Draw a circle on the image    
+   cv2.circle(myimage,(x_position,y_position), drop_size, (blue,green,red), -1)
+
+#################################################################
    # Show the image in the window
    cv2.imshow('drops',myimage)
    
-   cv2.circle(myimage,(x_position,y_position), drop_size, (blue,green,red), -1)
-
+   # Wait a bit for a key to be pressed. This line also redraws the 
+   # pictures so it's important
    ch=cv2.waitKey(frame_length) & 0xFF
 
+   # If that key is 27 ("ESC") then quit
    if ch==27:
       break
