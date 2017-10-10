@@ -6,6 +6,9 @@ import sys
 import numpy as np
 from random import randint
 
+cv2.namedWindow('facedetect')
+
+
 b=50
 g=50
 r=200
