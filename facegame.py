@@ -14,11 +14,12 @@ g=150
 r=150
 colour=(b,g,r)
 
-px=5
-py=5
+balldiameter=10
+bx=100
+by=balldiameter/2
 ballcolour=(255,100,100)
-px_direction=4
-py_direction=4
+bx_direction=2
+by_direction=8
 
 
 #The face detector can have minimum and maximum sizes. 
@@ -35,12 +36,14 @@ while True:
 
    height, width= img.shape[:2]
 
-   px=px+px_direction
-   py=py+py_direction
-   if (px>width or px<0):
-      px_direction=-px_direction
-   if (py>height or py<0):
-      py_direction=-py_direction
+   bx=bx+bx_direction
+   by=by+by_direction
+   if (bx>width or bx<0):
+      bx_direction=-bx_direction
+   if (by<0):
+      by_direction=-by_direction
+   if (by>height):
+      by=balldiameter/2
    # read an image from the video camera
    # convert the image to greyscale (black and white) storing it in the 
    # variable "grey"
@@ -52,7 +55,8 @@ while True:
 
    # loop through and draw the detected faces on the image
    for x, y, w, h in rects:
-      if ((px > x) and (px < x+w) and (py > y) and (py < y+h)):
+      if ((bx > x) and (bx < x+w) and (by < y) and (by > y-balldiameter )):
+         by_direction=-by_direction
          colour=(0,0,255) # make the face flash red
          print("Ouch!")
       else:
@@ -62,7 +66,7 @@ while True:
    if (len(rects)==0):
       print("You're hiding, naughty") 
 
-   cv2.circle(img, (px,py), 10, ballcolour, -1)
+   cv2.circle(img, (bx,by), balldiameter, ballcolour, -1)
    cv2.imshow('facedetect', img)
 
 
