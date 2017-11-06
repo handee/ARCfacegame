@@ -63,6 +63,8 @@ while True:
    # loop through the detected faces, draw on the image and do game stuff
    for x, y, w, h in rects:
       cv2.rectangle(img, (x, y), (x+w, y+h), faceboxcolour, 2)
+      if (ydrop>y) and (xdrop>x) and (xdrop<x+w):
+         print("it's below the face!")
 
    cv2.imshow('My Game', img)
 
